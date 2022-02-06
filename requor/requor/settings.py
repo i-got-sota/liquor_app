@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 from pathlib import Path
+from xml.dom.minidom import parseString
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -38,7 +40,15 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     
-    'accounts.apps.AccountsConfig'
+    'accounts.apps.AccountsConfig',
+
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.line',
+    'allauth.socialaccount.providers.twitter',
+    'allauth.socialaccount.providers.google',
 ]
 
 MIDDLEWARE = [
@@ -70,17 +80,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'requor.wsgi.application'
-
-
-# Database
-# https://docs.djangoproject.com/en/4.0/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
 
 
 # Password validation
@@ -118,8 +117,52 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+STATICFILE_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+AUTH_USER_MODEL = 'accounts.CustomUser'
+
+# allauthで使用するdjango.contrib.sitesのサイト識別用ID
+SITE_ID = 1
+
+AUTHENTICATION_BACKENDS = (
+    'allauth.account.auth_backends.AuthenticationBackend',
+    # 一般ユーザー用（メールアドレス認証)
+    'django.contrib.auth.backends.ModelBackend',
+    # 管理サイト用(ユーザー名認証)
+)
+
+# メールアドレス認証に変更する設定
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+
+# サインアップにメールアドレス確認を挟む設定
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_USERNAME_REQUIRED = True
+
+ACCOUNT_LOGOUT_ON_GET = True  # ログアウトリンクのクリック一発でログアウト
+ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = True # メールアドレスでの確認後即時ログイン
+
+SOCIALACCOUNT_PROVIDERS = {
+    'line': {
+        'SCOPE': ['profile','openid'],
+    }
+}
+
+
+
+
+# local_settings.py
+try:
+    from .local_settings import *
+except ImportError:
+    pass

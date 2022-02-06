@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang='ja'>
+<head>
+    <meta charset='UTF-8'/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>トップページ</title>
+</head>
+
+<body>
+<h2>ホーム</h2>
+{% if user.is_authenticated %}
+ようこそ {{ user.get_username }} さん
+<p><a href="{% url 'account_logout' %}">ログアウト</a></p>
+{% else %}
+<p><a href="{% url 'account_login' %}">ログイン</a></p>
+<a href='{% url "google_login" %}'>Googleでログイン</a>
+<a href='{% url "twitter_login" %}'>Twitterでログイン</a>
+<a href='{% url "line_login" %}'>LINEでログイン</a>
+{% endif %}
+
+
+
+</body>
+
+</head>
+</html>

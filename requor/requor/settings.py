@@ -152,10 +152,20 @@ ACCOUNT_USERNAME_REQUIRED = True
 ACCOUNT_LOGOUT_ON_GET = True  # ログアウトリンクのクリック一発でログアウト
 ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = True # メールアドレスでの確認後即時ログイン
 
+SOCIALACCOUNT_LOGIN_ON_GET = True
+
 SOCIALACCOUNT_PROVIDERS = {
     'line': {
         'SCOPE': ['profile','openid'],
     }
+}
+
+# allauthのフォームカスタマイズ
+ACCOUNT_FORMS = {
+    'login': 'accounts.forms.MyLoginForm',
+    'signup': 'accounts.forms.MySignupForm',
+    'reset_password_from_key': 'accounts.forms.MyResetPasswordKeyForm',
+    'reset_password': 'accounts.forms.MyResetPasswordForm',
 }
 
 

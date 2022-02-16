@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="31" height="31" viewBox="0 0 31 31">
+  <g id="Google-Button" transform="translate(1)">
+    <g id="btn_google_dark_normal" transform="translate(-1)">
+      <g id="button">
+        <g id="button-bg">
+          <rect id="長方形_27" data-name="長方形 27" width="31" height="17" rx="2" fill="#4285f4"/>
+          <rect id="長方形_28" data-name="長方形 28" width="31" height="17" rx="2" fill="none"/>
+          <rect id="長方形_29" data-name="長方形 29" width="31" height="17" rx="2" fill="none"/>
+          <rect id="長方形_30" data-name="長方形 30" width="31" height="17" rx="2" fill="none"/>
+        </g>
+      </g>
+      <g id="button-bg-copy" transform="translate(0 1)">
+        <rect id="長方形_31" data-name="長方形 31" width="29" height="29" rx="7" transform="translate(1)" fill="#fff"/>
+        <rect id="長方形_32" data-name="長方形 32" width="29" height="29" rx="1" transform="translate(0 1)" fill="none"/>
+        <rect id="長方形_33" data-name="長方形 33" width="29" height="29" rx="1" transform="translate(0 1)" fill="none"/>
+        <rect id="長方形_34" data-name="長方形 34" width="29" height="29" rx="1" transform="translate(0 1)" fill="none"/>
+      </g>
+      <g id="logo_googleg_48dp" transform="translate(8.3 8.017)">
+        <path id="Shape" d="M15.912,8.836a8.273,8.273,0,0,0-.131-1.473H9v2.785h3.875a3.312,3.312,0,0,1-1.437,2.173v1.807h2.327a7.022,7.022,0,0,0,2.147-5.292Z" transform="translate(-1.8 -1.473)" fill="#4285f4" fill-rule="evenodd"/>
+        <path id="Shape-2" data-name="Shape" d="M7.391,16.542A6.874,6.874,0,0,0,12.157,14.8L9.83,12.991A4.344,4.344,0,0,1,3.363,10.71H.957v1.865a7.2,7.2,0,0,0,6.434,3.967Z" transform="translate(-0.191 -2.142)" fill="#34a853" fill-rule="evenodd"/>
+        <path id="Shape-3" data-name="Shape" d="M3.171,9.56a4.257,4.257,0,0,1,0-2.736V4.958H.766a7.209,7.209,0,0,0,0,6.467L3.171,9.56Z" transform="translate(0 -0.992)" fill="#fbbc05" fill-rule="evenodd"/>
+        <path id="Shape-4" data-name="Shape" d="M7.391,2.864A3.89,3.89,0,0,1,10.144,3.94l2.065-2.065A6.92,6.92,0,0,0,7.391,0,7.2,7.2,0,0,0,.957,3.967L3.363,5.832A4.291,4.291,0,0,1,7.391,2.864Z" transform="translate(-0.191 0)" fill="#ea4335" fill-rule="evenodd"/>
+        <path id="Shape-5" data-name="Shape" d="M0,0H14.4V14.4H0Z" fill="none" fill-rule="evenodd"/>
+      </g>
+    </g>
+  </g>
+</svg>

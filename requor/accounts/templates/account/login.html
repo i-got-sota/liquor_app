@@ -1,0 +1,64 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang='ja'>
+<head>
+    <meta charset='UTF-8'/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;300;400;500;700&family=Roboto:wght@100;300;400;500;700&display=swap" rel="stylesheet">   
+    <link rel='stylesheet' type='text/css' href='{% static "account/css/login.css"%}' />
+    <link rel='icon' href='{% static "account/img/app_icon_afterpath.png" %}' />
+    <title>Requor</title>
+</head>
+
+<body>
+    
+<div class='body-container'>
+    <div class='white-back'>
+
+        <div class='logo-flex'><img src="{% static 'account/img/app_icon_afterpath.svg' %}">
+        <h2 class='title-flex'><div class='first-title-letter'>R</div><div>equor</div></h2>
+        </div>
+        <form action='{% url "account_login" %}' method='POST' class='login-form'>
+            {{ form.non_foeld_errors }}
+            {% csrf_token %}
+            {% for field in form %}
+            {% if field != form.remember %}
+            <div class='form'>
+                {{ field }}
+            </div>
+            {% endif %}
+            {% endfor %}
+    
+            {% if form.errors %}
+                <div class='error'>
+                    メールアドレス、またはパスワードが正しくありません。
+                </div>
+            {% endif %}
+    
+            {% if redirect_field_value %}
+                <input type='hidden' name='{{ redirect_field_name }}' value='{{redirect_field_value}}' />
+            {% endif %}
+    
+           <button type='submit' class='submit-button'>ログイン</button>
+    
+            <p class='password'><a href="{% url 'account_reset_password' %}">パスワードを忘れましたか?</a></p>
+        </form>
+        <hr>
+        <p class='supplement'>または</p>
+        <div class='social-login-container'>
+        <a href='{% url "google_login" %}' class='social-login-button google'>
+            <div class='social-img'><img src="{% static 'account/img/google_login.svg' %}"></div><div class='social-letter'>Googleでログイン</div></a>
+        <a href='{% url "twitter_login" %}' class='social-login-button twitter'>
+            <div class='social-img'><img src="{% static 'account/img/twitter_login.svg' %}"></div><div class='social-letter'>Twitterでログイン</div></a>
+        <a href='{% url "line_login" %}' class='social-login-button line'>
+            <div class='social-img'><img src="{% static 'account/img/line_login.svg' %}"></div><div class='social-letter'>LINEでログイン</div></a>
+        </div>
+        <a href="{% url 'account_signup' %}" class='signup-button'>アカウントを無料登録</a>
+    </div>
+</div>
+</body>
+
+</head>
+</html>

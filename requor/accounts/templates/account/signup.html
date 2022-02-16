@@ -1,0 +1,107 @@
+{% extends 'account/base.html' %}
+{% load static %}
+
+{% block extra_style %}
+<link rel="stylesheet" type="text/css" href="{% static 'account/css/signup.css' %}" />
+{% endblock %}
+
+{% block header-content %}
+<div class='back' id='back'><img src="{% static 'account/img/back.svg' %}"></div>
+<div class='header-title'>アカウントの登録</div>
+<div class='room'></div>
+{% endblock %}
+
+{% block content %}
+    <form action="{% url 'account_signup' %}" method='post'>
+            {{ form.non_foeld_errors }}
+            {% csrf_token %}
+        <div id='signup-container'>
+        <div class='paging-container'>
+            <div class='signup-form-container'>
+                <div class='meter'><img src="{% static 'account/img/meter_first.svg' %}"></div>
+                <div class='context'>メールアドレスを入力</div>
+                <div class='form'>
+                    {{ form.email }}
+                </div>
+                <input type='button' class='next-button' value='次へ'>
+            </div>
+            <div class='signup-form-container'>
+                <div class='meter'><img src="{% static 'account/img/meter_second.svg' %}"></div>
+                <div class='context'>ユーザー名を入力</div>
+                <div class='form'>
+                    {{ form.username }}
+                </div>
+                <input type='button' class='next-button' value='次へ'>
+            </div>
+            <div class='signup-form-container'>
+                <div class='meter'><img src="{% static 'account/img/meter_last.svg' %}"></div>
+                <div class='context'>パスワードを入力</div>
+                <div class='form'>
+                    <div class='pass'>{{ form.password1 }}</div>
+                    <div class='pass'>{{ form.password2 }}</div>
+                </div>
+                <input type='submit' class='signup-button' value='アカウントを作成'>
+            </div>
+        </div>
+        </div> 
+        {% if form.errors %}
+        {% for item in form %}
+        <div class='error'>
+            {{ item.errors }}
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% if redirect_field_value %}
+        <input type='hidden' name='{{ redirect_field_name }}' value='{{redirect_field_value}}' />
+        {% endif %}
+        </form>
+{% endblock %}
+
+{% block script %}
+<script type='text/javascript'>
+'use strict';
+
+var page_flag = 0
+let body_container = document.getElementById('body-container')
+
+document.addEventListener('DOMContentLoaded', function() {
+    page_flag = Math.floor(body_container.scrollLeft / window.innerWidth)
+
+    document.getElementById('back').addEventListener('click', function() {
+        switch(page_flag) {
+            case 0:
+                location.href = 'http://localhost:8000/accounts/login/' // url変更時に変更する //
+            case 1:
+            case 2:
+                body_container.scrollLeft -= window.innerWidth;
+                page_flag = Math.floor(body_container.scrollLeft / window.innerWidth)
+        }
+    }, false); 
+
+
+    document.getElementById('body-container').addEventListener('scroll', function() {
+        if (body_container.scrollLeft % window.innerWidth !== 0) {
+            body_container.scrollLeft = window.innerWidth * Math.floor(body_container.scrollLeft / window.innerWidth)
+        }
+        page_flag = Math.floor(body_container.scrollLeft / window.innerWidth)
+        console.log(page_flag); 
+        console.log(body_container.scrollLeft)
+    }, false);
+
+    document.getElementsByClassName('next-button')[0].addEventListener('click', function() {
+        body_container.scrollLeft += window.innerWidth;
+        page_flag = Math.floor(body_container.scrollLeft / window.innerWidth)
+
+        console.log(page_flag)
+        console.log(body_container.scrollLeft)
+    }, false);
+
+    document.getElementsByClassName('next-button')[1].addEventListener('click', function() {
+        body_container.scrollLeft += window.innerWidth;
+        page_flag = Math.floor(body_container.scrollLeft / window.innerWidth)
+        console.log(page_flag)
+        console.log(body_container.scrollLeft)
+    }, false);
+}, false);
+</script>
+{% endblock %}
